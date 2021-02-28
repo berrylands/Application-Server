@@ -89,6 +89,45 @@
 {{> record/offset_analyser }}
 {{> record/visualiser }}
 
+<div id="safariWarning" class="global-dialog" data-active="false">
+    <div class="dialog-content">
+        <h3 id="heading">Hello, Apple Fan!</h3>
+        <p>We're sorry, but iOS devices and Safari on Mac do not have the advanced technologies that Choirless uses to record songs.</p>
+        <p>That said, Choirless works fantastically in Chrome, Firefox, and Edge on Mac, Windows, Linux, and Android devices. If you open up the link in one of those browsers, everything (should) be great.</p>
+        <p>In the meantime, you can still use your Choirless account to manage your members and watch recordings.</p>
+        <button class="cta-button black">OK</button>
+    </div>
+</div>	
+
+<script>
+
+    (function(){
+
+        'use strict';
+
+        const safariWarning = document.querySelector('#safariWarning');
+        const okBtn = safariWarning.querySelector('button');
+
+        var ua = navigator.userAgent.toLowerCase(); 
+        if (ua.indexOf('safari') !== -1) { 
+            if (ua.indexOf('chrome') > -1) {
+            } else {
+                safariWarning.dataset.active = "true";
+            }
+        }
+
+        okBtn.addEventListener('click', function(){
+            if(window.history){
+                window.history.back();
+            } else {
+                window.location = "/dashboard";
+            }
+        });
+
+
+    }());
+</script>
+
 <script>
 
     (function(){
@@ -178,7 +217,7 @@
             function pauseTheRecordedVideos(){
 
                 Array.from(leadView.querySelectorAll('video')).forEach(function(video){
-                    video.currentTime = 0;
+                    video.currentTime = Number(video.dataset.offset / 1000) || 0;
                     video.pause();
                 });
 
@@ -233,11 +272,11 @@
 
                 leadView.insertBefore(contentContainer, moreVideosTrigger);
 
-                Array.from(leadView.querySelectorAll('video')).forEach(function(video){
+                /*Array.from(leadView.querySelectorAll('video')).forEach(function(video){
 
                     video.volume = 1 / Number(document.body.dataset.performances);
 
-                });
+                });*/
 
                 videoElement.addEventListener('ended', function(){
                     
@@ -463,7 +502,7 @@
                 }
 
                 recordedVideo.dataset.active = "true";
-                recordedVideo.currentTime = 0;
+                recordedVideo.currentTime = streamOffset / 1000;
 
                 playbackBtn.dataset.active = "true";
                 saveBtn.dataset.active = "true";
@@ -496,7 +535,7 @@
                 recordedVideo.pause()
                 recordedVideos.pause();
 
-                recordedVideo.currentTime = 0;
+                recordedVideo.currentTime = streamOffset / 1000;
 
             }
 

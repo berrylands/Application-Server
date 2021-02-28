@@ -73,6 +73,10 @@ a.sub-link{
   font-size: 0.75em;
 }
 
+.no-text-decoration{
+  text-decoration: none;
+}
+
 input[type="text"]{
   font-family: 'Montserrat';
 }
@@ -445,10 +449,21 @@ button{
   background: #ffe563;
   color: black;
   text-shadow: initial;
+  border: 1px solid #a2a2a2;
 }
 
 .cta-button.yellow:hover{
   background: #fff1ad;
+}
+
+.cta-button.transparent{
+  background: transparent;
+  color: black !important;
+  border: 1px solid black;
+}
+
+.cta-button.transparent:hover{
+  background-color: rgba(0,0,0,0.05);
 }
 
 .cta-button.loading{
@@ -562,6 +577,12 @@ footer div p:last-of-type{
   display: block;
   width: 100%;
   max-width: 50%;
+}
+
+.global-dialog#safariWarning .dialog-content{
+  max-height: 75vh;
+  overflow: scroll;
+  font-size: 0.75em;
 }
 
 .modal{
@@ -1119,6 +1140,7 @@ body#dashboard main section#choirMenu{
   background: white;
   padding: 0;
   color: black;
+  position: relative;
 }
 
 body#dashboard main section#choirMenu h2{
@@ -1127,11 +1149,13 @@ body#dashboard main section#choirMenu h2{
 
 body#dashboard main section#choirMenu ul{
   margin-bottom: 1em;
+  max-height: 50%;
 }
 
 body#dashboard main section#choirMenu ul li{
   margin-bottom: 0.5em;
   color: black;
+  font-size: 0.85em;
 }
 
 body#dashboard main section#choirMenu ul li:hover{
@@ -1170,6 +1194,14 @@ body#dashboard main section#choirMenu ul li a.selected::after{
 
 body#dashboard main section#choirMenu button.cta-button{
   width: 100%;
+  margin-top: 1em;
+}
+
+body#dashboard main section#choirMenu.sidebar #choirCreationCTA {
+  position: absolute;
+  bottom: 1em;
+  width: 100%;
+  background: white;
 }
 
 body#dashboard main section#choirInfo{
@@ -1628,7 +1660,7 @@ body#admin main section form{
     margin-top: 0.5em;
   }
 
-  body#dashboard main section#choirMenu .center-text{    
+  body#dashboard main section#choirMenu #choirCreationCTA{    
     position: absolute;
     bottom: 1em;
     left: 0;
